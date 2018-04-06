@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Aux from '../../hoc/Aux';
-import Burgur from '../../components/Burger/Burgur';
+import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
 
@@ -12,7 +12,7 @@ const INGREDIENT_PRICES = {
 };
 
 
-class BurgurBuilder extends Component {
+class BurgerBuilder extends Component {
   
   state = {
     ingredients: {
@@ -72,11 +72,10 @@ class BurgurBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
-    ;
     
     return (
       <Aux>
-        <Burgur ingredients={this.state.ingredients}/>
+        <Burger ingredients={this.state.ingredients}/>
         <BuildControls
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
@@ -89,4 +88,4 @@ class BurgurBuilder extends Component {
   
 }
 
-export default BurgurBuilder;
+export default BurgerBuilder;
