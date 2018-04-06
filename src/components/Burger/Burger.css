@@ -1,4 +1,4 @@
-.Burgur {
+.Burger {
     
     width: 100%;
     margin: auto;
@@ -10,21 +10,21 @@
 }
 
 @media (min-width: 1000px) and (min-height: 700px){
-    .Burgur {
+    .Burger {
         width: 700px;
         height: 600px;
     }
 
 }
 @media (min-width: 500px) and (min-height: 401px){
-    .Burgur {
+    .Burger {
         width: 450px;
         height: 400px;
     }
 
 }
 @media (min-width: 500px) and (min-height: 400px){
-    .Burgur {
+    .Burger {
         width: 350px;
         height: 300px;
     }
