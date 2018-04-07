@@ -40,7 +40,6 @@ class BurgerBuilder extends Component {
       totalPrice: newPrice,
       ingredients: updatedIngredients
     });
-    
   };
   
   removeIngredientHandler = (type) => {
@@ -92,10 +91,9 @@ class BurgerBuilder extends Component {
     const priceDeduction = INGREDIENT_PRICES[type];
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice - priceDeduction;
-    
     this.setState({
       totalPrice: newPrice,
-      ingredients: updatedIngredients,
+      ingredients: updatedIngredients
     });
   }
   
@@ -120,7 +118,9 @@ class BurgerBuilder extends Component {
         <BuildControls
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
-          disabled={disabledInfo}/>
+          disabled={disabledInfo}
+          price={this.state.totalPrice}
+        />
       </Aux>
     
     );
