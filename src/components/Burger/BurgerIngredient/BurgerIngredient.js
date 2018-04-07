@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import classes from './BurgerIngredient.css';
 
 class BurgerIngredient extends Component {
+  
+  
+  removeSelf() {
+    this.props.remove(this.props.type, this.props.index)
+  };
+  
+  
   render() {
     let ingredient = null;
     
@@ -20,16 +27,16 @@ class BurgerIngredient extends Component {
           </div>);
         break;
       case ('meat'):
-        ingredient = <div className={classes.Meat}></div>;
+        ingredient = <div className={classes.Meat} onClick={() => this.removeSelf()}></div>;
         break;
       case('cheese'):
-        ingredient = <div className={classes.Cheese}></div>;
+        ingredient = <div className={classes.Cheese} onClick={() => this.removeSelf()}></div>;
         break;
       case('salad'):
-        ingredient = <div className={classes.Salad}></div>;
+        ingredient = <div className={classes.Salad} onClick={() => this.removeSelf()}></div>;
         break;
       case('bacon'):
-        ingredient = <div className={classes.Bacon}></div>;
+        ingredient = <div className={classes.Bacon} onClick={() => this.removeSelf()}></div>;
         break;
       default:
         ingredient = null;

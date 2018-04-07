@@ -57,12 +57,12 @@ class BurgerBuilder extends Component {
     if (lastTypeIndex > -1) {
       updatedIngredientsOrder = updatedIngredientsOrder.filter((_, index) => lastTypeIndex !== index);
     }
-  
+    
     this.setState({
       ingredientsOrder: updatedIngredientsOrder
     });
-  
-  
+    
+    
   };
   
   removeIngredientOnClick = (type, index) => {
@@ -95,7 +95,7 @@ class BurgerBuilder extends Component {
       totalPrice: newPrice,
       ingredients: updatedIngredients
     });
-  };
+  }
   
   
   render() {
