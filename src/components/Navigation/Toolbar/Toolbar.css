@@ -17,3 +17,21 @@
     height: 100%;
 
 }
+
+.Logo {
+    height: 80%;
+}
+
+.DrawerToggle {
+    display: none;
+}
+
+@media (max-width: 499px) {
+    .DesktopOnly {
+        display: none;
+    }
+
+    .DrawerToggle {
+        display: inline;
+    }
+}
