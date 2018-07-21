@@ -18,7 +18,7 @@ class ContactData extends Component {
     event.preventDefault();
     this.setState({loading: true});
     const order = {
-      ingredientsOrder: this.props.ingredientsOrder,
+      ingredientsOrder: this.props.ingredientsOrder.length !== 0 ? this.props.ingredientsOrder : ['No ingredients'],
       totalPrice: this.props.totalPrice,
       customer: {
         name: 'Zavin Hussein',

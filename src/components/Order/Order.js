@@ -20,7 +20,13 @@ const order = (props) => {
     }
     return null;
   });
-  const ingredients = 'Bacon ' + (bacon.length) + ", Cheese " + (cheese.length) + ", Salad " + (salad.length) + ", Meat " + (meat.length);
+  let ingredients = '';
+  if (props.ingredients.includes('No ingredients')) {
+    ingredients = 'No ingredients';
+  } else {
+    ingredients = 'Bacon ' + (bacon.length) + ", Cheese " + (cheese.length) + ", Salad " + (salad.length) + ", Meat " + (meat.length);
+  }
+  console.log(props.ingredients);
   
   return (
     <div className={classes.Order}>
