@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.css'
 import axios from '../../../axios-orders'
@@ -17,7 +19,7 @@ class ContactData extends Component {
         value: '',
         validation: {
           required: true
-        
+  
         },
         valid: false,
         touched: false
@@ -103,8 +105,8 @@ class ContactData extends Component {
       formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
     }
     const order = {
-      ingredientsOrder: this.props.ingredientsOrder.length !== 0 ? this.props.ingredientsOrder : ['No ingredients'],
-      totalPrice: this.props.totalPrice,
+      ingredientsOrder: this.props.ingsOrder.length !== 0 ? this.props.ingsOrder : ['No ingredients'],
+      totalPrice: this.props.price,
       orderData: formData
     };
     
@@ -118,8 +120,6 @@ class ContactData extends Component {
         this.setState({loading: false});
         console.log(error);
       });
-    
-    console.log(this.props.ingredientsOrder)
   };
   
   checkValidity = (value, rules) => {
@@ -193,4 +193,11 @@ class ContactData extends Component {
   }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+  return {
+    ingsOrder: state.ingredientsOrder,
+    price: state.totalPrice
+  }
+};
+
+export default connect(mapStateToProps)(ContactData);
