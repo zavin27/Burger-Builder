@@ -26,7 +26,6 @@ const order = (props) => {
   } else {
     ingredients = 'Bacon ' + (bacon.length) + ", Cheese " + (cheese.length) + ", Salad " + (salad.length) + ", Meat " + (meat.length);
   }
-  console.log(props.ingredients);
   
   return (
     <div className={classes.Order}>
