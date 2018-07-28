@@ -11,7 +11,8 @@ const initialState = {
     bacon: 0.7
   },
   totalPrice: 4,
-  error: false
+  error: false,
+  building: false
 };
 
 const addIngredient = (state, action) => {
@@ -20,7 +21,8 @@ const addIngredient = (state, action) => {
   const updatedState = {
     ingredients: updatedIngredients,
     ingredientsOrder: [...state.ingredientsOrder, action.ingredientName],
-    totalPrice: state.totalPrice + state.ingredientsPrices[action.ingredientName]
+    totalPrice: state.totalPrice + state.ingredientsPrices[action.ingredientName],
+    building: true
   };
   return updateObject(state, updatedState);
 };
@@ -40,7 +42,8 @@ const removeIngredient = (state, action) => {
   const updatedSt = {
     ingredients: updatedIngs,
     ingredientsOrder: updatedIngredientsOrder,
-    totalPrice: state.totalPrice - state.ingredientsPrices[action.ingredientName]
+    totalPrice: state.totalPrice - state.ingredientsPrices[action.ingredientName],
+    building: true
   };
   return updateObject(state, updatedSt);
 };
@@ -50,7 +53,8 @@ const removeIngredientOnClick = (state, action) => {
   return updateObject(state, {
     ingredients: updatedIngiens,
     ingredientsOrder: [...state.ingredientsOrder].filter((_, i) => action.index !== i),
-    totalPrice: state.totalPrice - state.ingredientsPrices[action.ingredientName]
+    totalPrice: state.totalPrice - state.ingredientsPrices[action.ingredientName],
+    building: true
   });
 };
 const setIngredients = (state, action) => {
@@ -58,7 +62,8 @@ const setIngredients = (state, action) => {
     ingredients: action.ingredients,
     ingredientsOrder: [],
     totalPrice: 4,
-    error: false
+    error: false,
+    building: false
   });
 };
 const fetchIngredientsFailed = (state, action) => {
