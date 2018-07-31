@@ -3,7 +3,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import classes from './Auth.css';
 import * as actions from '../../store/actions/index';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Spinner from '../../components/UI/Spinner/spinner';
 import {updateObject, checkValidity} from "../../shared/utility";
@@ -16,8 +16,9 @@ class Auth extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Mail Address'
+          placeholder: ''
         },
+        label: 'Email address',
         value: '',
         validation: {
           required: true,
@@ -31,8 +32,9 @@ class Auth extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'password',
-          placeholder: 'Password'
+          placeholder: ''
         },
+        label: 'Password',
         value: '',
         validation: {
           required: true,
@@ -43,7 +45,7 @@ class Auth extends Component {
         touched: false
       },
     },
-    isSignUp: true
+    isSignUp: true,
   };
   
   componentDidMount() {
@@ -74,6 +76,13 @@ class Auth extends Component {
     this.setState(prevState => {
       return {isSignUp: !prevState.isSignUp}
     });
+    const updatedControls = updateObject(this.state.controls, {
+      email: updateObject(this.state.controls.email, {touched: false}),
+      password: updateObject(this.state.controls.password, {touched: false}),
+    
+    });
+    this.setState({controls: updatedControls});
+    this.props.onErrorRemove()
   };
   
   
@@ -94,7 +103,8 @@ class Auth extends Component {
         changed={(event) => this.inputChangedHandler(event, formElement.id)}
         invalid={!formElement.config.valid}
         shouldValidate={formElement.config.validation}
-        touched={formElement.config.touched}/>
+        touched={formElement.config.touched}
+        label={formElement.config.label}/>
     ));
     if (this.props.loading) {
       form = <Spinner/>
@@ -138,18 +148,61 @@ class Auth extends Component {
     if (this.props.isAuthenticated) {
       isAuthenticated = <Redirect to={this.props.authRedirectPath}/>
     }
+  
+    let authButtons = (
+      <div>
+        <div className={classes.Buttons}>
+          <Button btnType="Success" type="submit" clicked={this.submitHandler}>SIGN IN</Button>
+      
+        </div>
+        <div className={classes.bottomButton}>
+          <span>Don't have an account?</span>
+          <Button
+            type='reset'
+            clicked={this.switchAuthModeHandler}
+            btnType='authBot'>SIGN UP NOW
+          </Button>
+        </div>
+      </div>
+    );
+  
+    if (this.state.isSignUp) {
+      authButtons = (
+        <div>
+          <div className={classes.Buttons}>
+            <Button btnType="Success" type="submit" clicked={this.submitHandler}>REGISTER</Button>
+        
+          </div>
+          <div className={classes.bottomButton}>
+            <span>Have an account?</span>
+            <Button
+              type='reset'
+              clicked={this.switchAuthModeHandler}
+              btnType='authBot'>SIGN IN NOW
+            </Button>
+          </div>
+        </div>
+      )
+    }
     
     return (
       <div className={classes.Auth}>
+        <div className={classes.SignIn}>
+          <p className={classes.TopParagraph}>{this.state.isSignUp ? "Sign Up" : 'Sign In'} </p>
+        </div>
         {isAuthenticated}
-        {error}
-        <form onSubmit={this.submitHandler}>
-          {form}
-          <Button btnType="Success">SUBMIT</Button>
-        </form>
-        <Button
-          clicked={this.switchAuthModeHandler}
-          btnType='Danger'>SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}</Button>
+        <div className={classes.Container}>
+          {error}
+          <form>
+            <div className={classes.formContainer}>
+              {form}
+            </div>
+            <div className={classes.recoverContainer}>
+              <Link to='/resetpassword' className={classes.recover}>Forgot your password?</Link>
+            </div>
+            {authButtons}
+          </form>
+        </div>
       </div>
     )
   }
@@ -168,7 +221,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
-    onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+    onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
+    onErrorRemove: () => dispatch(actions.removeError())
   }
 };
 

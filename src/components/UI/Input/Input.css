@@ -1,24 +1,32 @@
 .Input {
     width: 100%;
     padding: 10px;
+    margin: auto;
     box-sizing: border-box;
+    cursor: text;
 }
 
 .Label {
-    font-weight: bold;
+    color: #a5a5a5;
+    font-size: small;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
+    text-align: left;
+    padding-left: 10px;
 }
 
 .InputElement {
     outline: none;
     border: 1px solid #cccccc;
-    background-color: white;
+    background-color: #ebebeb;
     font: inherit;
     padding: 6px 10px;
     display: block;
     width: 100%;
     box-sizing: border-box;
+    border-radius: 27px;
+    height: 50px;
+    text-align: start;
 }
 
 .InputElement:focus {
@@ -28,5 +36,5 @@
 
 .Invalid {
     border: 1px solid red;
-    background-color: #FDA49A;
+    /*background-color: #FDA49A;*/
 }

@@ -9,6 +9,7 @@ import Orders from './containers/Orders/Orders';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
+import ResetPassword from './containers/Auth/ResetPassword/ResetPassword';
 
 class App extends Component {
   
@@ -24,6 +25,7 @@ class App extends Component {
       <Switch>
         <Route path='/auth' component={Auth}/>
         <Route path='/' exact component={BurgerBuilder}/>
+        <Route path='/resetpassword' exact component={ResetPassword}/>
         <Redirect to='/'/>
       </Switch>
     );
@@ -35,6 +37,8 @@ class App extends Component {
           <Route path='/auth' component={Auth}/>
           <Route path='/logout' component={Logout}/>
           <Route path='/' exact component={BurgerBuilder}/>
+          <Route path='/resetpassword' exact component={ResetPassword}/>
+          
           <Redirect to='/'/>
         </Switch>
       )

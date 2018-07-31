@@ -91,3 +91,9 @@ export const checkAuthStatus = () => {
     }
   }
 };
+
+export const removeError = () => {
+  return {
+    type: actionTypes.REMOVE_ERROR
+  }
+};
