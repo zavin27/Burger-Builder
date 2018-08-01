@@ -32,6 +32,12 @@ export const logOut = () => {
   }
 };
 
+export const removeError = () => {
+  return {
+    type: actionTypes.REMOVE_ERROR
+  }
+};
+
 export const checkAuthTimeout = (expirationTime) => {
   return dispatch => {
     setTimeout(() => {
@@ -92,8 +98,111 @@ export const checkAuthStatus = () => {
   }
 };
 
-export const removeError = () => {
+export const resetPasswordStart = () => {
   return {
-    type: actionTypes.REMOVE_ERROR
+    type: actionTypes.RESET_PASSWORD_START
   }
+};
+
+export const resetPasswordSuccess = () => {
+  return {
+    type: actionTypes.RESET_PASSWORD_SUCCESS,
+  }
+};
+export const resetPasswordFail = (error) => {
+  return {
+    type: actionTypes.RESET_PASSWORD_FAIL,
+    error: error
+  }
+};
+
+export const resetPassword = (email) => {
+  return dispatch => {
+    dispatch(resetPasswordStart());
+    const resetData = {
+      email: email,
+      requestType: "PASSWORD_RESET"
+    };
+    axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=AIzaSyD1sW04Nc6vu1FG96bgBn-3E9OvyvKqI3Y', resetData)
+      .then(response => {
+        dispatch(resetPasswordSuccess(response.data.email))
+      })
+      .catch(error => {
+        dispatch(resetPasswordFail(error.response.data.error))
+      })
+  }
+};
+
+export const newPasswordStart = () => {
+  return {
+    type: actionTypes.NEW_PASSWORD_START
+  }
+};
+
+export const newPasswordSuccess = () => {
+  return {
+    type: actionTypes.NEW_PASSWORD_SUCCESS,
+  }
+};
+export const newPasswordFail = (error) => {
+  return {
+    type: actionTypes.NEW_PASSWORD_FAIL,
+    error: error
+  }
+};
+
+export const newPassword = (password, oobCode) => {
+  return dispatch => {
+    dispatch(newPasswordStart());
+    const newData = {
+      oobCode: oobCode,
+      newPassword: password
+    };
+    axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/resetPassword?key=AIzaSyD1sW04Nc6vu1FG96bgBn-3E9OvyvKqI3Y', newData)
+      .then(response => {
+        console.log(response);
+        dispatch(newPasswordSuccess());
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch(newPasswordFail(error.response.data.error))
+      })
+  }
+};
+
+const verifyPasswordStart = () => {
+  return {
+    type: actionTypes.VERIFY_PASSWORD_START
+  }
+};
+
+export const verifyPasswordSuccess = (oobCode) => {
+  return {
+    type: actionTypes.VERIFY_PASSWORD_SUCCESS,
+    oobCode: oobCode
+  }
+};
+export const verifyPasswordFail = (error) => {
+  return {
+    type: actionTypes.VERIFY_PASSWORD_FAIL,
+    error: error
+  }
+};
+
+export const verifyPassword = (oobCode) => {
+  return dispatch => {
+    dispatch(verifyPasswordStart());
+    const verifyData = {
+      oobCode: oobCode
+    };
+    axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/resetPassword?key=AIzaSyD1sW04Nc6vu1FG96bgBn-3E9OvyvKqI3Y', verifyData)
+      .then(response => {
+        console.log(response.data);
+        dispatch(verifyPasswordSuccess(oobCode));
+      })
+      .catch(error => {
+        console.log(error.message);
+        dispatch(verifyPasswordFail(error.response.data.error))
+      })
+  };
 };

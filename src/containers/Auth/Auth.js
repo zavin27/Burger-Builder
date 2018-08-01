@@ -45,7 +45,7 @@ class Auth extends Component {
         touched: false
       },
     },
-    isSignUp: true,
+    isSignUp: false,
   };
   
   componentDidMount() {

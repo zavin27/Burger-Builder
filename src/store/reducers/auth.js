@@ -7,7 +7,8 @@ const initialState = {
   userId: null,
   error: null,
   loading: false,
-  authRedirectPath: '/'
+  authRedirectPath: '/',
+  oobCode: null,
 };
 
 const authStart = (state, action) => {
@@ -44,6 +45,60 @@ const removeError = (state, action) => {
   return updateObject(state, {error: null})
 };
 
+const resetPasswordStart = (state, action) => {
+  return updateObject(state, {error: null, loading: true})
+};
+
+const resetPasswordSuccess = (state, action) => {
+  return updateObject(state, {
+    error: null,
+    loading: false
+  })
+};
+
+const resetPasswordFail = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
+    loading: false
+  })
+};
+const newPasswordStart = (state, action) => {
+  return updateObject(state, {error: null, loading: true})
+};
+
+const newPasswordSuccess = (state, action) => {
+  return updateObject(state, {
+    error: null,
+    loading: false
+  })
+};
+
+const newPasswordFail = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
+    loading: false
+  })
+};
+const verifyPasswordStart = (state, action) => {
+  return updateObject(state, {error: null, loading: true})
+};
+
+const verifyPasswordSuccess = (state, action) => {
+  return updateObject(state, {
+    oobCode: action.oobCode,
+    error: null,
+    loading: false
+  })
+};
+
+const verifyPasswordFail = (state, action) => {
+  return updateObject(state, {
+    // error: action.error,
+    goodCode: false,
+    loading: false
+  })
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -58,6 +113,24 @@ const reducer = (state = initialState, action) => {
       return setAuthRedirectPath(state, action);
     case actionTypes.REMOVE_ERROR:
       return removeError(state, action);
+    case actionTypes.RESET_PASSWORD_START:
+      return resetPasswordStart(state, action);
+    case actionTypes.RESET_PASSWORD_SUCCESS:
+      return resetPasswordSuccess(state, action);
+    case actionTypes.RESET_PASSWORD_FAIL:
+      return resetPasswordFail(state, action);
+    case actionTypes.NEW_PASSWORD_START:
+      return newPasswordStart(state, action);
+    case actionTypes.NEW_PASSWORD_SUCCESS:
+      return newPasswordSuccess(state, action);
+    case actionTypes.NEW_PASSWORD_FAIL:
+      return newPasswordFail(state, action);
+    case actionTypes.VERIFY_PASSWORD_START:
+      return verifyPasswordStart(state, action);
+    case actionTypes.VERIFY_PASSWORD_SUCCESS:
+      return verifyPasswordSuccess(state, action);
+    case actionTypes.VERIFY_PASSWORD_FAIL:
+      return verifyPasswordFail(state, action);
     default:
       return state;
   }

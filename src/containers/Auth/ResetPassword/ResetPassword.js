@@ -3,6 +3,8 @@ import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import classes from './ResetPassword.css';
 import {updateObject, checkValidity} from "../../../shared/utility";
+import {connect} from 'react-redux';
+import {resetPassword} from "../../../store/actions";
 
 
 class ResetPassword extends Component {
@@ -16,7 +18,7 @@ class ResetPassword extends Component {
       isEmail: true
     },
     valid: false,
-    touched: false
+    touched: false,
   };
   
   
@@ -30,8 +32,16 @@ class ResetPassword extends Component {
     this.setState(updatedState);
   };
   
+  submitHandler = (event) => {
+    event.preventDefault();
+    this.props.onPasswordReset(this.state.value);
+    this.setState(updateObject(this.state, {resetPasswordSent: true}))
+  };
+  
   
   render() {
+  
+  
     return (
       <div className={classes.Auth}>
         <div className={classes.SignIn}>
@@ -63,4 +73,10 @@ class ResetPassword extends Component {
   }
 }
 
-export default ResetPassword
+const mapDispatchToProps = dispatch => {
+  return {
+    onPasswordReset: (email) => dispatch(resetPassword(email))
+  }
+};
+
+export default connect(null, mapDispatchToProps)(ResetPassword);

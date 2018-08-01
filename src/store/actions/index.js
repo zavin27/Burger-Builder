@@ -15,5 +15,8 @@ export {
   logOut,
   setAuthRedirectPath,
   checkAuthStatus,
-  removeError
+  removeError,
+  resetPassword,
+  newPassword,
+  verifyPassword
 } from './auth';
