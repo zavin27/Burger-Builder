@@ -14,8 +14,10 @@ const checkoutSummary = (props) => {
           removeIngredientOnClick={props.removeIngredientOnClick}
         />
       </div>
-      <Button btnType='Danger' clicked={props.checkoutCancelled}>CANCEL</Button>
-      <Button btnType='Success' clicked={props.checkoutContinued}>CONTINUE</Button>
+      <div className={classes.buttonContainer}>
+        <Button btnType='orderDanger' clicked={props.checkoutCancelled}>CANCEL</Button>
+        <Button btnType='orderSuccess' clicked={props.checkoutContinued}>CONTINUE</Button>
+      </div>
     </div>
   )
 };

@@ -14,7 +14,10 @@ class NewPassword extends Component {
     controls: {
       PasswordOne: {
         elementType: 'input',
-        type: 'password',
+        elementConfig: {
+          type: 'password',
+          placeholder: ''
+        },
         label: 'New password',
         value: '',
         validation: {
@@ -26,7 +29,10 @@ class NewPassword extends Component {
       },
       PasswordTwo: {
         elementType: 'input',
-        type: 'password',
+        elementConfig: {
+          type: 'password',
+          placeholder: ''
+        },
         label: 'Re-type new password',
         value: '',
         validation: {
@@ -70,7 +76,10 @@ class NewPassword extends Component {
   
   
   render() {
-    const isValid = this.state.controls.PasswordOne.value !== this.state.controls.PasswordTwo.value;
+    const isInvalid =
+      this.state.controls.PasswordOne.value !== this.state.controls.PasswordTwo.value ||
+      this.state.controls.PasswordOne.value === '' ||
+      this.state.controls.PasswordTwo.value === '';
     const formElementsArray = [];
     for (let key in this.state.controls) {
       formElementsArray.push({
@@ -107,7 +116,8 @@ class NewPassword extends Component {
             </div>
             <div>
               <div className={classes.Buttons}>
-                <Button btnType="Success" type="submit" disabled={isValid} clicked={this.submitHandler}>CHANGE</Button>
+                <Button btnType="Success" type="submit" disabled={isInvalid}
+                        clicked={this.submitHandler}>CHANGE</Button>
               </div>
             </div>
           </form>

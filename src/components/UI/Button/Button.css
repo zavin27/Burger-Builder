@@ -31,6 +31,34 @@
 
 .Danger {
     background-color: #944317;
+    color: white;
+}
+
+.Danger:hover {
+    transition: all 0.5s ease-out;
+    background-color: #6a3214;
+}
+
+.orderSuccess {
+    background-color: #CF8F2E;
+    color: white;
+    margin: 0 5px 0 5px;
+}
+
+.orderSuccess:hover {
+    transition: all 0.5s ease-out;
+    background-color: #AA6817;
+}
+
+.orderDanger {
+    background-color: #944317;
+    color: white;
+    margin: 0 5px 0 5px;
+}
+
+.orderDanger:hover {
+    transition: all 0.5s ease-out;
+    background-color: #6a3214;
 }
 
 .Button:disabled {

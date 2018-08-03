@@ -63,7 +63,8 @@ class ResetPassword extends Component {
             </div>
             <div>
               <div className={classes.Buttons}>
-                <Button btnType="Success" type="submit" clicked={this.submitHandler}>Reset Password</Button>
+                <Button btnType="Success" type="submit" disabled={!this.state.valid} clicked={this.submitHandler}>Reset
+                  Password</Button>
               </div>
             </div>
           </form>

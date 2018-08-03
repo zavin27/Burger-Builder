@@ -1,9 +1,3 @@
-.CheckoutSummary {
-    width: 80%;
-    text-align: center;
-    margin: auto;
-}
-
 .buttonContainer {
     display: flex;
     flex-direction: row;

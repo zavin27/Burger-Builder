@@ -158,7 +158,7 @@ class ContactData extends Component {
             touched={formElement.config.touched}
           />
         ))}
-        <Button btnType='Success' disabled={!this.state.formIsValid}>ORDER</Button>
+        <Button btnType='orderSuccess' disabled={!this.state.formIsValid}>ORDER</Button>
       </form>
     );
     if (this.props.loading) {
